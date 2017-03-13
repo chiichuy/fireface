@@ -1,0 +1,28 @@
+{
+  "name": "fireface",
+  "version": "1.0.0",
+  "description": "Login comunication from facebook sdk to firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiichuy/fireface.git"
+  },
+  "keywords": [
+    "React-Native",
+    "firebase",
+    "facebook"
+  ],
+  "author": "Jesus Amador",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiichuy/fireface/issues"
+  },
+  "homepage": "https://github.com/chiichuy/fireface#readme",
+  "dependencies": {
+    "firebase": "^3.7.1",
+    "react-native-fbsdk": "^0.5.0"
+  }
+}
