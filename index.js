@@ -9,8 +9,9 @@ const {
     LoginManager
 } = FBSDK;
 
-const checkLoginState = function checkLoginState(token) {
-    if (token) {
+const checkLoginState = function(token) {
+    new Promise( function(resolve, reject) {
+        if (token) {
 
         // User is signed-in Facebook.
         var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
@@ -23,7 +24,6 @@ const checkLoginState = function checkLoginState(token) {
                 var credential = firebase.auth.FacebookAuthProvider.credential( token.accessToken );
 
 
-
                 // Sign in with the credential from the Facebook user.
                 firebase.auth().signInWithCredential(credential).catch(function(error) {
                     // Handle Errors here.
@@ -34,15 +34,17 @@ const checkLoginState = function checkLoginState(token) {
                     // The firebase.auth.AuthCredential type that was used.
                     var credential = error.credential;
                     // ...
-                });
+                }).then(()=> resolve({}));
             } else {
                 // User is already signed-in Firebase with the correct user.
+                resolve({})
             }
         });
     } else {
         // User is signed-out of Facebook.
-        firebase.auth().signOut();
+        firebase.auth().signOut().then(() => resolve({}) );
     }
+    })
 }
 
 function isUserEqual(facebookAuthResponse, firebaseUser) {
@@ -60,15 +62,15 @@ function isUserEqual(facebookAuthResponse, firebaseUser) {
 }
 
 
-const logOut = () => {
-    LoginManager.logOut()
-    firebase.auth().signOut();
+const logOut = async () => {
+    await LoginManager.logOut()
+    await firebase.auth().signOut();
 }
 
 const checkUser = async () => {
     const token = await AccessToken.getCurrentAccessToken()
 
-    checkLoginState(token)
+    await checkLoginState(token)
 }
 
 
