@@ -1,6 +1,6 @@
 {
   "name": "fire-face",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Login comunication from facebook sdk to firebase",
   "main": "index.js",
   "scripts": {
